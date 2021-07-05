@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./ContactUser.module.css";
-import * as formActions from "../../../redux/form/form-actions";
+import formActions from "../../../redux/form/form-actions";
 
 const ContactUser = ({ id, name, number, onDeleteContacts }) => {
   return (

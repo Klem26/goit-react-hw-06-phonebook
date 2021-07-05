@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./ContactForm.module.css";
 import { connect } from "react-redux";
-import * as formActions from "../../redux/form/form-actions";
+import formActions from "../../redux/form/form-actions";
 
 class ContactForm extends Component {
   state = {
@@ -80,5 +80,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-console.log(mapDispatchToProps());
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

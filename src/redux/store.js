@@ -1,11 +1,16 @@
-import { createStore, combineReducers } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import logger from "redux-logger";
 import formReducer from "./form/form-reducer";
 
-const rootReducer = combineReducers({
-  contacts: formReducer,
+const middleware = [...getDefaultMiddleware(), logger];
+
+const store = configureStore({
+  reducer: {
+    contacts: formReducer,
+  },
+  middleware: middleware,
+  devTools: process.env.NODE_ENV === "development",
 });
-
-const store = createStore(rootReducer, composeWithDevTools());
-
 export default store;

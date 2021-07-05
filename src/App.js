@@ -14,9 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     const contacts = localStorage.getItem("contacts");
-    console.log(contacts);
     const parsedContacts = JSON.parse(contacts);
-    console.log(parsedContacts);
 
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
@@ -26,7 +24,6 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
-      console.log("Обновился state с контактами ");
     }
   }
 
@@ -44,32 +41,10 @@ class App extends Component {
       contacts: [{ name, number, id }, ...contacts],
       filter: "",
     });
-
-    console.log({ name, number });
-  };
-
-  deleteContact = (contactId) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter(
-        (contact) => contact.id !== contactId
-      ),
-    }));
-  };
-
-  onChangeFilter = (event) => {
-    // const filterValue = event.currentTarget.value;
-    // this.setState({ filter: filterValue });
-    this.setState({ filter: event.currentTarget.value });
   };
 
   render() {
     const { contacts, filter } = this.state;
-
-    const normalizedFilter = filter.toLowerCase();
-
-    const filterUser = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
 
     return (
       <div className="container">
@@ -79,7 +54,7 @@ class App extends Component {
         <h2 className="title">Contacts</h2>
         <Filter value={filter} onChange={this.onChangeFilter} />
         <ContactList
-          contacts={filterUser}
+          contacts={contacts}
           onDeleteContacts={this.deleteContact}
         />
       </div>
