@@ -1,50 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
 import Filter from "./components/Filter";
 
-import { v4 as uid } from "uuid";
-import contacts from "./components/ContactList/contacts.json";
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">Phonebook</h1>
+      <ContactForm />
 
-class App extends Component {
-  state = {
-    contacts: contacts,
-    filter: "",
-  };
-
-  formSubmitHandler = ({ name, number }) => {
-    const { contacts } = this.state;
-
-    if (contacts.some((contact) => contact.name === name)) {
-      alert(
-        `${name} is already in contacts. Want to replace an existing contact ?`
-      );
-      return;
-    }
-    const id = uid();
-    this.setState({
-      contacts: [{ name, number, id }, ...contacts],
-      filter: "",
-    });
-  };
-
-  render() {
-    const { contacts, filter } = this.state;
-
-    return (
-      <div className="container">
-        <h1 className="title">Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
-
-        <h2 className="title">Contacts</h2>
-        <Filter value={filter} onChange={this.onChangeFilter} />
-        <ContactList
-          contacts={contacts}
-          onDeleteContacts={this.deleteContact}
-        />
-      </div>
-    );
-  }
-}
+      <h2 className="title">Contacts</h2>
+      <Filter />
+      <ContactList />
+    </div>
+  );
+};
 
 export default App;
